@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RSNApiClient.Models;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -22,6 +23,7 @@ namespace RSNApiClient
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        // Price updates
         public HttpStatusCode UpdatePrice(PriceUpdate update)
         {
             return PutPriceUpdateAsync(update).Result;
@@ -31,6 +33,17 @@ namespace RSNApiClient
         {
             HttpResponseMessage response = await httpClient.PutAsJsonAsync("$api/importPrice/", update);
             return response.StatusCode;
+        }
+
+        // CustomerInfo
+        public HttpStatusCode PushCustomerInfo(CustomerInfo info)
+        {
+            return PostCustomerInfoAsync(info).Result;
+        }
+
+        private async Task<HttpStatusCode> PostCustomerInfoAsync(CustomerInfo info)
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync("")
         }
 
     }
