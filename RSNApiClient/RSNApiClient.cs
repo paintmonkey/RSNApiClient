@@ -11,16 +11,18 @@ namespace RSNApiClient
     {
         static HttpClient httpClient = new HttpClient();
 
-        public RSNApiClient(string baseurl)
+        public RSNApiClient(string baseurl, string username, string password)
         {
-            Initialize(baseurl);
+            Initialize(baseurl, username, password);
         }
 
-        private void Initialize(string baseurl)
+        private void Initialize(string baseurl, string username, string password)
         {
             httpClient.BaseAddress = new Uri(baseurl);
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(
+                System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", username, password))));
         }
 
         // Price updates
@@ -43,7 +45,7 @@ namespace RSNApiClient
 
         private async Task<HttpStatusCode> PostCustomerInfoAsync(CustomerInfo info)
         {
-            HttpResponseMessage response = await httpClient.PostAsJsonAsync("")
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync("$/api/models/customermutations/records/new", info);
         }
 
     }
