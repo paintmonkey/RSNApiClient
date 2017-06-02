@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Requests\BBRequest.cs" />
+    <Compile Include="Service\CustomerInfoService.cs" />
     <Compile Include="Models\CustomerInfo.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Money.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RSNApiClient.cs" />
+    <Compile Include="Service\Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RSNApiClient.Models
 {
-    class CustomerInfo
+    public class CustomerInfo
     {
         public Action Action { get; set; }
         public string CompanyCode { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RSNApiClient
 {
-    class RSNApiClient
+    public class RSNApiClient
     {
         static HttpClient httpClient = new HttpClient();
 
@@ -25,16 +25,14 @@ namespace RSNApiClient
                 System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", username, password))));
         }
 
-        // Price updates
-        public HttpStatusCode UpdatePrice(PriceUpdate update)
+        public Task<HttpResponseMessage> GetAsync(string path)
         {
-            return PutPriceUpdateAsync(update).Result;
+            return httpClient.GetAsync(path);
         }
 
-        private async Task<HttpStatusCode> PutPriceUpdateAsync(PriceUpdate update)
+        public Task GetStreamAsync(string path)
         {
-            HttpResponseMessage response = await httpClient.PutAsJsonAsync("$api/importPrice/", update);
-            return response.StatusCode;
+            return httpClient.GetStreamAsync(path);
         }
 
         // CustomerInfo
@@ -46,6 +44,7 @@ namespace RSNApiClient
         private async Task<HttpStatusCode> PostCustomerInfoAsync(CustomerInfo info)
         {
             HttpResponseMessage response = await httpClient.PostAsJsonAsync("$/api/models/customermutations/records/new", info);
+            return response.StatusCode;
         }
 
     }

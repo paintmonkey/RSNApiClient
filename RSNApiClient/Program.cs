@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RSNApiClient.Services;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -8,8 +9,7 @@ namespace RSNApiClient
 {
     class Program
     {
-        static HttpClient httpClient = new HttpClient();
-
+       
         static void Main(string[] args)
         {
             RunAsync().Wait();
@@ -17,7 +17,9 @@ namespace RSNApiClient
 
         static async Task RunAsync()
         {
-            Console.ReadLine();
+            var service = new CustomerInfoService();
+            var response = await service.Get();
+            Console.Write(response);
         }
     }
 }
