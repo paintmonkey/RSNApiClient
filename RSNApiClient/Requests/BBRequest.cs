@@ -12,5 +12,11 @@ namespace RSNApiClient.Requests
         {
             return string.Format("{0}/api/models/{1}/records", baseUrl, model);
         }
+
+        public static string POSTUrl(string baseUrl, string model)
+        {
+            // e.g. api/models/customermutations/records/new
+            return string.Format("{0}/api/models/{1}/records/new", baseUrl, model);
+        }
     }
 }
