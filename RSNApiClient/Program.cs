@@ -1,9 +1,8 @@
 ﻿using RSNApiClient.Services;
+using RSNApiClient.Models;
 using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace RSNApiClient
 {
@@ -18,8 +17,15 @@ namespace RSNApiClient
         static async Task RunAsync()
         {
             var service = new CustomerInfoService();
+           
+            var info = new CustomerInfo();
+            info.CustomerNumber = "New customer number";
+
+            var list = new List<CustomerInfo>() { info };
+            var responses = await service.Post(list);
             var response = await service.Get();
             Console.Write(response);
+            Console.ReadLine();
         }
     }
 }

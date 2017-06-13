@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace RSNApiClient.Services
     public interface IWebService<T>
     {
         Task<List<T>> Get();
-        void Post(List<T> input);
+        Task<List<HttpStatusCode>> Post(List<T> input);
     } 
 
     public abstract class Service

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using RSNApiClient.Models;
 using RSNApiClient.Requests;
 using Newtonsoft.Json;
@@ -14,7 +15,7 @@ namespace RSNApiClient.Services
     {
         private static string ModelName = "customermutations";
 
-        public CustomerInfoService() : base("https://rsn-staging.bettyblocks.com", "rob@pixelcloud.nl", "")
+        public CustomerInfoService() : base("https://rsn-staging.bettyblocks.com", "hajo.koerts@bettyblocks.com", "79f769263f31d53744ec335cf2e94129")
         {
             
         }
@@ -30,9 +31,16 @@ namespace RSNApiClient.Services
             return JsonConvert.DeserializeObject<List<CustomerInfo>>(response);
         }
 
-        public void Post(List<CustomerInfo> input)
+        public async Task<List<HttpStatusCode>> Post(List<CustomerInfo> input)
         {
-            throw new NotImplementedException();
+            var path = BBRequest.POSTUrl(BaseUrl, ModelName);
+            var responses = new List<HttpStatusCode>();
+            foreach (var info in input)
+            {
+                responses.Add(await Client.PostFormAsync(path, info));
+            }
+
+            return responses;
         }
     }
 }
