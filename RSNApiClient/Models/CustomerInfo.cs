@@ -11,7 +11,7 @@ namespace RSNApiClient.Models
     {
         public Action Action { get; set; }
         public string CompanyCode { get; set; }
-        [JsonProperty("record[customernumber]")]
+        
         public string CustomerNumber { get; set; }
         public string Name { get; set; }
         public string SearchName { get; set; }

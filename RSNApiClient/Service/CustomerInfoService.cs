@@ -16,6 +16,7 @@ namespace RSNApiClient.Services
         private static string ModelName = "customermutations";
 
         public CustomerInfoService() : base("https://rsn-staging.bettyblocks.com", "hajo.koerts@bettyblocks.com", "")
+
         {
             
         }
@@ -37,7 +38,8 @@ namespace RSNApiClient.Services
             var responses = new List<HttpStatusCode>();
             foreach (var info in input)
             {
-                responses.Add(await Client.PostFormAsync(path, info));
+                var response = await Client.PostFormAsync(path, info);
+                responses.Add(response);
             }
 
             return responses;

@@ -24,7 +24,7 @@ namespace RSNApiClient
             var list = new List<CustomerInfo>() { info };
             var responses = await service.Post(list);
             var response = await service.Get();
-            Console.Write(response);
+            //Console.Write(response);
             Console.ReadLine();
         }
     }

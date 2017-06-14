@@ -47,13 +47,19 @@ namespace RSNApiClient
 
         public async Task<HttpStatusCode> PostFormAsync<T>(string path, T payload)
         {
-            var response = await path.WithBasicAuth(username, password).PostUrlEncodedAsync(payload);
+            var requestContent = Global.Http.ToFormUrlEncodedContent(payload);
+
+            Console.WriteLine(String.Format("--- POST/{0} ---", requestContent.ToString()));
+            Console.WriteLine(String.Format("--- POST/{0} ---", path));
+            Console.WriteLine(String.Format("--- POST/{0} ---", payload));
+            HttpResponseMessage response = await httpClient.PostAsync(path, requestContent);
+            
             return response.StatusCode; 
         }
 
         public async Task<HttpStatusCode> PostAsync<T>(string path, T payload)
         {
-            Console.WriteLine(String.Format("--- POST/{0} ---", path));
+            
             HttpResponseMessage response = await httpClient.PostAsJsonAsync(path, payload);
             Console.WriteLine(String.Format("--- Response:{0}", response.StatusCode));
             return response.StatusCode;
