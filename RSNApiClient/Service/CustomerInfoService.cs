@@ -32,7 +32,7 @@ namespace RSNApiClient.Services
             return JsonConvert.DeserializeObject<List<CustomerInfo>>(response);
         }
 
-        public async Task<List<HttpStatusCode>> Post(List<CustomerInfo> input)
+        public async Task<List<HttpStatusCode>> Post(IList<CustomerInfo> input)
         {
             var path = BBRequest.POSTUrl(BaseUrl, ModelName);
             var responses = new List<HttpStatusCode>();
@@ -43,6 +43,11 @@ namespace RSNApiClient.Services
             }
 
             return responses;
+        }
+
+        public IList<HttpStatusCode> PostSync(IList<CustomerInfo> input)
+        {
+            return this.Post(input).Result;
         }
     }
 }

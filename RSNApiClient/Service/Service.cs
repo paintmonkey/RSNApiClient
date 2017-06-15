@@ -8,7 +8,8 @@ namespace RSNApiClient.Services
     public interface IWebService<T>
     {
         Task<List<T>> Get();
-        Task<List<HttpStatusCode>> Post(List<T> input);
+        Task<List<HttpStatusCode>> Post(IList<T> input);
+        IList<HttpStatusCode> PostSync(IList<T> input);
     } 
 
     public abstract class Service
